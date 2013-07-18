@@ -3,6 +3,7 @@
 fs = require "fs"
 path = require "path"
 jade = require "jade"
+juice = require "juice"
 _ = require "underscore"
 
 ### renderHandler ###
@@ -10,10 +11,11 @@ _ = require "underscore"
 
 renderHandler = (opts) ->
 
-  # if our filename isn't custom,
-  # append `Date.now()`
   now = Date.now()
   
+
+  # if our filename isn't custom,
+  # append `Date.now()`
   @fileName = now
 
   # output type, ".html, .htm, .aspx, etc"
@@ -33,6 +35,9 @@ renderHandler = (opts) ->
   # default template to use, so you don't have to 
   # define a bunch of `unecessary stuff`
   @template = path.join __dirname, "..", "includes", "template.jade"
+  
+  # default style to use for inlining css w/ `juice`
+  @style = path.join __dirname, "..", "includes", "style.css" #"style.css" # 
 
   # extend our `opts` if they're there
   if opts? then _.extend @, opts
@@ -42,7 +47,9 @@ renderHandler = (opts) ->
 
   # stats/timer so we can see how long this takes
   @start = []
-  @start.push now
+  @start.push 
+    ts: now
+    place: "init"
 
   # return our the whole object, so we can do stuff later with it 
   @
@@ -62,7 +69,9 @@ renderHandler::render = (fn) ->
   @html = render self
 
   # push the time it took to run the `render fn`
-  @start.push Date.now()
+  @start.push 
+    ts: Date.now()
+    place: "render"
 
   # give callback strategy if its needed,
   # massive data and async, with single threads
@@ -92,7 +101,34 @@ renderHandler::filer = (fn) ->
   fs.writeFile self.outFile, self.html, (err) ->
     return if err? then fn err, null
     # push the time it took to run `fs.writeFile`
-    self.start.push Date.now()
+    
+    self.start.push 
+      ts: Date.now()
+      place: "filer"
+
     fn null, self
+
+renderHandler::juice = (fn) ->
   
+  self = @
+
+  juice.juiceContent @html, { url: @style }, (err, html) ->
+    return if err? then fn err, null
+
+    console.log html
+
+    fs.unlink self.outFile, (err) ->
+      return if err? then fn err, null
+
+      fs.writeFile self.outFile, html, (err) ->
+        return if err? then fn err, null
+
+        self.start.push 
+          ts: Date.now()
+          place: "juice"        
+
+
+        fn null, self
+
+    
 module.exports = renderHandler

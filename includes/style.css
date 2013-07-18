@@ -1,0 +1,19 @@
+html { background: black; }
+
+body {
+  background: #fff;
+  color: red;
+}
+
+table {
+  background: #d9d9d9;
+}
+
+table tr {
+  background: red;
+  font-size: 14px;
+}
+
+table tr td {
+  text-align: left;
+}

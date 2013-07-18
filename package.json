@@ -11,7 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "underscore": "1.4.4",
-    "jade": "latest"
+    "jade": "latest",
+    "juice": "~0.4.0"
   },
   "devDependencies": {
     "mocha": "~1.12.0",

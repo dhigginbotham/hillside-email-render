@@ -46,6 +46,7 @@ Name | Default | Description
 `input` | `[]` | data to render
 `out` | `../output` | output path for rendered files
 `template` | `../includes/template.jade` | template file to render from
+`style` | `true` | inline styles with `juice`
 
 ### Tests
 - run `npm test`
