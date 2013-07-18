@@ -47,6 +47,9 @@ Name | Default | Description
 `out` | `../output` | output path for rendered files
 `template` | `../includes/template.jade` | template file to render from
 
+### Tests
+- run `npm test`
+
 ### License
 ```md
 The MIT License (MIT)
