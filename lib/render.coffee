@@ -78,13 +78,15 @@ renderHandler::filer = (fn) ->
   # filer method will do what it sounds like,
   # become your personal secretary and place these
   # files, `callback fn` required
+
+  # keep track of our scope
   self = @
 
   # create the full output path and fileName 
-  file = path.join self.out, self.fullName
+  self.outFile = path.join self.out, self.fullName
 
   # call `fs.writeFile` and have tons of fun
-  fs.writeFile file, self.html, (err) ->
+  fs.writeFile self.outFile, self.html, (err) ->
     return if err? then fn err, null
     # push the time it took to run `fs.writeFile`
     self.start.push Date.now()

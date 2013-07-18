@@ -19,3 +19,5 @@ template.filer (err, done) ->
     console.log "process length: #{ts}ms"
 
   console.log "finished in: #{total}ms"
+
+  console.log "you may review: #{done.outFile}"
