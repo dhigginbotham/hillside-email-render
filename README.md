@@ -26,7 +26,6 @@ template.filer (err, done) ->
   console.log "finished in: #{total}ms"
 
   console.log "you may review: #{done.outFile}"
-
 ```
 
 ### Example Output
@@ -37,6 +36,16 @@ process length: 57ms
 finished in: 113ms
 you may review: D:\node\hillside-email-render\output\1374182429360.html
 ```
+
+### Available Options
+Name | Default | Description
+--- | --- | ---
+`fileName` | `Date.now()` | output file name
+`fileType` | `html` | output file path
+`type` | `array` | `@todo`: add support for `json` and `object`
+`input` | `[]` | data to render
+`out` | `../output` | output path for rendered files
+`template` | `../includes/template.jade` | template file to render from
 
 ### License
 ```md
