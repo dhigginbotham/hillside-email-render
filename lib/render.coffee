@@ -12,7 +12,9 @@ renderHandler = (opts) ->
 
   # if our filename isn't custom,
   # append `Date.now()`
-  @fileName = Date.now()
+  now = Date.now()
+  
+  @fileName = now
 
   # output type, ".html, .htm, .aspx, etc"
   @fileType = "html"
@@ -40,7 +42,7 @@ renderHandler = (opts) ->
 
   # stats/timer so we can see how long this takes
   @start = []
-  @start.push Date.now()
+  @start.push now
 
   # return our the whole object, so we can do stuff later with it 
   @
@@ -55,6 +57,8 @@ renderHandler::render = (fn) ->
   render = jade.compile fs.readFileSync self.template, "utf8"
 
   @html = render self
+
+  # push the time it took to run the `render fn`
   @start.push Date.now()
 
   # give callback strategy if its needed,
@@ -69,17 +73,20 @@ renderHandler::filer = (fn) ->
 
   # set @input back to an empty array, keep
   # out footprint small'ish
-  # @input = []
+  @input = []
 
   # filer method will do what it sounds like,
   # become your personal secretary and place these
   # files, `callback fn` required
   self = @
 
+  # create the full output path and fileName 
   file = path.join self.out, self.fullName
 
+  # call `fs.writeFile` and have tons of fun
   fs.writeFile file, self.html, (err) ->
-    return if err? then fn err, null 
+    return if err? then fn err, null
+    # push the time it took to run `fs.writeFile`
     self.start.push Date.now()
     fn null, self
   
