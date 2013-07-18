@@ -25,6 +25,17 @@ template.filer (err, done) ->
 
   console.log "finished in: #{total}ms"
 
+  console.log "you may review: #{done.outFile}"
+
+```
+
+### Example Output
+```md
+process length: 0ms
+process length: 56ms
+process length: 57ms
+finished in: 113ms
+you may review: D:\node\hillside-email-render\output\1374182429360.html
 ```
 
 ### License
