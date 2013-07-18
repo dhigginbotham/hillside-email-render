@@ -48,6 +48,9 @@ renderHandler = (opts) ->
   @
 
 renderHandler::render = (fn) ->
+
+  # broke this into a prototype to give us a little
+  # more control of our scope
   
   self = @
 
@@ -73,7 +76,7 @@ renderHandler::filer = (fn) ->
 
   # set @input back to an empty array, keep
   # out footprint small'ish
-  @input = []
+  # @input = []
 
   # filer method will do what it sounds like,
   # become your personal secretary and place these

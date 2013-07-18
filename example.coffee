@@ -1,5 +1,3 @@
-"use strict"
-
 render = require "./lib/render"
 
 input = require "./seed/array"
@@ -10,8 +8,10 @@ template.render()
 
 template.filer (err, done) ->
   return if err? then console.log err
+  
   ms = []
   total = 0
+
   for t in done.start
     ts = (t - done.start[0])
     ms.push(ts)
