@@ -28,8 +28,6 @@ describe "build a file, test it's validity, then delete it", () ->
     # build a template from our options
     template = new render 
       input: input
-      # fileName: "myCoolFile"
-      type: "array"
       fileType: "htm"
 
     # sync render

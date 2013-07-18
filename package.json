@@ -19,6 +19,6 @@
     "coffee-script": ">= 1.3.3"
   },
   "scripts": {
-    "test": "mocha test/render.coffee -R spec -t 3000 --compilers coffee:coffee-script"
+    "test": "mocha test/render.coffee -R spec -t 3000"
   }
 }
