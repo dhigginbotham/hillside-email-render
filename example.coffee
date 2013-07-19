@@ -1,6 +1,6 @@
 render = require "./lib/render"
 
-input = require "./seed/small-array"
+input = require "./seed/huge-array"
 
 template = new render input: input
 
@@ -8,19 +8,15 @@ template.render()
 
 template.filer (err, done) ->
   return if err? then console.log err
-  
-  # ms = []
-  # total = 0
 
-  # for t in done.start
-  #   ts = (t - done.start[0])
-  #   ms.push(ts)
-  #   total += ts
-  #   console.log "process length: #{ts}ms"
+  ms = []
+  total = 0
 
-  # console.log "finished in: #{total}ms"
+  for t in done.start
+    ts = (t.ts - done.start[0].ts)
+    ms.push(ts)
+    total += ts
+    console.log "#{t.place} took: #{ts}ms from start"
 
 
-  template.juice (err, juiced) ->
-    if err? then console.log err
-    console.log "you may review: #{juiced.outFile}"
+  console.log "you may review: #{done.outFile}"

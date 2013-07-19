@@ -115,8 +115,6 @@ renderHandler::juice = (fn) ->
   juice.juiceContent @html, { url: @style }, (err, html) ->
     return if err? then fn err, null
 
-    console.log html
-
     fs.unlink self.outFile, (err) ->
       return if err? then fn err, null
 
