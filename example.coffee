@@ -18,5 +18,4 @@ template.filer (err, done) ->
     total += ts
     console.log "#{t.place} took: #{ts}ms from start"
 
-
   console.log "you may review: #{done.outFile}"
