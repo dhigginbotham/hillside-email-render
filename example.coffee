@@ -1,8 +1,10 @@
 render = require "./lib/render"
 
 huge = require "./seed/huge-array"
+array = require "./seed/array"
 
 multi = new render input: huge, multiFiles: true
+single = new render input: array
 
 multi.renderMulti (err, data) ->
   console.log err if err?
@@ -10,10 +12,7 @@ multi.renderMulti (err, data) ->
   data.html = []
   console.log data if data?
 
-array = require "./seed/array"
-
-single = new render input: array
-
+single.render()
 single.singleFile (err, done) ->
   return if err? then console.log err
 
