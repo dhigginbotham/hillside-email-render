@@ -1,25 +1,29 @@
 render = require "./lib/render"
 
-input = require "./seed/array"
+huge = require "./seed/huge-array"
 
-template = new render input: input, multiFiles: true
+multi = new render input: huge, multiFiles: true
 
-template.renderMulti (err, data) ->
+multi.renderMulti (err, data) ->
   console.log err if err?
   data.input = []
   data.html = []
   console.log data if data?
 
-# template.singleFile (err, done) ->
-#   return if err? then console.log err
+array = require "./seed/array"
 
-#   ms = []
-#   total = 0
+single = new render input: array
 
-#   for t in done.start
-#     ts = (t.ts - done.start[0].ts)
-#     ms.push(ts)
-#     total += ts
-#     console.log "#{t.place} took: #{ts}ms from start"
+single.singleFile (err, done) ->
+  return if err? then console.log err
 
-#   console.log "you may review: #{done.outFile}"
+  ms = []
+  total = 0
+
+  for t in done.start
+    ts = (t.ts - done.start[0].ts)
+    ms.push(ts)
+    total += ts
+    console.log "#{t.place} took: #{ts}ms from start"
+
+  console.log "you may review: #{done.outFile}"

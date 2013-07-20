@@ -35,9 +35,12 @@ renderHandler = (opts) ->
   # instead of the default large one
   @multiFiles = false
 
+  # pretty print the html output or not
+  @pretty = true
+
   @template = path.join __dirname, "..", "includes", "single.jade"
   # default style to use for inlining css w/ `juice`
-  @style = path.join __dirname, "..", "includes", "style.css" #"style.css" # 
+  @style = path.join __dirname, "..", "includes", "style.css"
 
   # extend our `opts` if they're there
   if opts? then _.extend @, opts
@@ -72,7 +75,7 @@ renderHandler::render = (fn) ->
   _jadeTemplate = fs.readFileSync(self.template, "utf8")
 
   opts =
-    pretty: true
+    pretty: self.pretty
 
   @render = jade.compile _jadeTemplate, opts
 
@@ -96,13 +99,11 @@ renderHandler::render = (fn) ->
 renderHandler::renderMulti = (fn) ->
 
   opts =
-    pretty: true
+    pretty: @pretty
   
   self = @
 
   _jadeTemplate = fs.readFileSync(self.template, "utf8")
-
-  console.log self.input.length
 
   for data in self.input 
 
