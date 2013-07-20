@@ -39,7 +39,7 @@ describe "build a file, test it's validity, then delete it", () ->
   it "should build a file", (done) ->
 
     # async file maker from template
-    template.filer (err, finished) ->
+    template.singleFile (err, finished) ->
       expect(err).to.be(null)
       expect(finished).not.to.be(null)
       
