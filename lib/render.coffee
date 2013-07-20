@@ -101,22 +101,22 @@ renderHandler::renderMulti = (fn) ->
   self = @
 
   _jadeTemplate = fs.readFileSync(self.template, "utf8")
-  _render = jade.compile _jadeTemplate, opts
 
-  for data in self.input
-    do (data) ->
-      
-      __html = _render data
+  console.log self.input.length
 
-      ts = Date.now()
+  for data in self.input 
 
-      # create the full output path and fileName 
-      outFile = path.join self.out, "#{ts}.#{self.fileType}"
+    _render = jade.compile _jadeTemplate, opts
+    __html = _render data
+    ts = Date.now()
 
-      # call `fs.writeFile` and have tons of fun
-      fs.writeFile outFile, __html, (err) ->
-        return if err? then fn err, null
-        # push the time it took to run `fs.writeFile`
+    # create the full output path and fileName 
+    outFile = path.join self.out, "#{ts}.#{self.fileType}"
+
+    # call `fs.writeFile` and have tons of fun
+    fs.writeFile outFile, __html, (err) ->
+      return if err? then fn err, null
+      # push the time it took to run `fs.writeFile`
 
   # give callback strategy if its needed,
   # massive data and async, with single threads
