@@ -2,6 +2,8 @@
 this script should take massive flat data and turn it into html chunks manageable
 for hillsides internal email system.
 
+![](https://travis-ci.org/dhigginbotham/hillside-email-render.png)
+
 ### Usage
 ```md
 
