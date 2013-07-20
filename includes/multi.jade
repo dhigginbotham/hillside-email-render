@@ -1,0 +1,27 @@
+html
+  head
+    meta(charset='utf-8')
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width')
+  body
+    table
+      tr
+        th Price
+        th Beds
+        th Baths
+        th SQFT
+      tr
+        td $#{locals.price}
+        td #{locals.beds}
+        td #{locals.baths}
+        td #{locals.sqft}
+      tr
+        th(colspan="4") Description
+      tr
+        td(colspan="4") #{locals.desc}
+      tr
+        th(colspan="4") MLS Num
+      tr
+        td(colspan="4") #{locals.mls}
+    hr
+
